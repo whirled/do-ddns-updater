@@ -1,13 +1,13 @@
 # DigitalOcean (DO) Dynamic DNS (DDNS) Updater
 
-A bash script that checks the IP set for an '_A_' record at DO DNS (via dig) against the current public IP and updates DO DNS with the new IP if necessary.
+A bash script that checks the IP set for an '_A_' record at DO DNS (via API) against the current public IP (via ifconfig.co) and updates DO DNS with the new IP if necessary.
 
 ## Docker Container Use
 
 * Create an API Token at DigitalOcean
 * Copy `.env.sample` to `.env` and edit values
 * Build image
-  * `docker build --tag do-ddns [--load] .`
+  * `docker build --tag do-ddns --load .`
     * See [Docker container build driver: --load](https://docs.docker.com/build/drivers/docker-container/#loading-to-local-image-store)
 * Run container
   * To get a list of DNS record API IDs (_see example below_) for use in `.env`

@@ -5,14 +5,14 @@ source .env
 
 # Check args for list records
 if [ $# -gt 0 ]; then
-    /usr/bin/curl -ks -X GET -H "Content-Type: application/json" -H "Authorization: Bearer ${DO_API_TOKEN}" "https://api.digitalocean.com/v2/domains/${DO_DNS_DOMAIN}/records" | jq -r '.domain_records[] | "\(.id) \(.name) \(.type) \(.data)"' | column -t
+    /usr/bin/curl -s -X GET -H "Content-Type: application/json" -H "Authorization: Bearer ${DO_API_TOKEN}" "https://api.digitalocean.com/v2/domains/${DO_DNS_DOMAIN}/records" | jq -r '.domain_records[] | "\(.id) \(.name) \(.type) \(.data)"' | column -t
     exit 0
 fi
 
-# Get Current IP for FQDN from DO DNS
-DNS_IPV4=$(/usr/bin/dig +short @ns1.digitalocean.com "${DO_DNS_FQDN}")
+# Get Current IP for FQDN from DO DNS via API
+DNS_IPV4=$(/usr/bin/curl -s -X GET -H "Content-Type: application/json" -H "Authorization: Bearer ${DO_API_TOKEN}" "https://api.digitalocean.com/v2/domains/${DO_DNS_DOMAIN}/records/${DO_DNS_RECORD_ID}" | jq -r ".domain_record.data")
 
-# Get Public IP
+# Get Public IP via ifconfig.co
 PUBLIC_IPV4=$(/usr/bin/curl -s https://ifconfig.co/)
 
 # Compare DNS IP to Public IP
