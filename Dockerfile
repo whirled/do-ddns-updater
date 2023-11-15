@@ -1,6 +1,8 @@
 FROM alpine:latest
-RUN apk add --no-cache bind-tools curl jq util-linux-misc ; \
-    mkdir /app
-ADD . /app
+ADD --chown=root:root . /app
+RUN \
+    apk add --no-cache bind-tools curl jq util-linux-misc ; \
+    chmod 755 /app/digitalocean_ddns_updater.sh ; \
+    chmod 400 /app/.env
 WORKDIR /app
 ENTRYPOINT ["/app/digitalocean_ddns_updater.sh"]
