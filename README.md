@@ -19,13 +19,13 @@ A bash script that checks the IP set for an '_A_' record at DO DNS (via API) aga
 
 * `docker run -it --rm do-ddns list`
     ```
-    #API_ID#   @    SOA    1800
-    #API_ID#   @    NS     ns1.digitalocean.com
-    #API_ID#   @    NS     ns2.digitalocean.com
-    #API_ID#   @    NS     ns3.digitalocean.com
-    #API_ID#   @    A      xxx.xxx.xxx.xxx
-    #API_ID#   www  CNAME  @
-    #API_ID#   tst  A      xxx.xxx.xxx.xxx
+    #API_ID#   @     SOA    1800
+    #API_ID#   @     NS     ns1.digitalocean.com
+    #API_ID#   @     NS     ns2.digitalocean.com
+    #API_ID#   @     NS     ns3.digitalocean.com
+    #API_ID#   @     A      xxx.xxx.xxx.xxx
+    #API_ID#   www   CNAME  @
+    #API_ID#   fqdn  A      xxx.xxx.xxx.xxx
     ```
 
 * `docker run -it --rm do-ddns`
