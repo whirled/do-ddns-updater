@@ -1,5 +1,5 @@
 FROM alpine:latest
-ADD --chown=root:root . /app
+ADD --chown=root:root ./app /app
 RUN \
     apk add --no-cache bind-tools curl jq util-linux-misc ; \
     chmod 755 /app/digitalocean_ddns_updater.sh ; \
